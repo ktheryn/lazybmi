@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:convert';
 
 class calculator {
   calculator({required this.height, required this.weight});
@@ -12,6 +13,13 @@ class calculator {
     _bmi = weight / pow(height / 100, 2);
     return _bmi.toStringAsFixed(1);
   }
+
+
+  String calculateBMI2() {
+    _bmi = weight / pow(height / 100, 2);
+    return _bmi.toStringAsFixed(1);
+  }
+
 
   bool getColor() {
     if (_bmi >= 40) {
@@ -41,7 +49,7 @@ class calculator {
       return 'Obesity I';
     } else if (_bmi >= 25) {
       return 'Overweight';
-    } else if (_bmi >= 18) {
+    } else if (_bmi >= 18.5) {
       return 'Normal';
     } else {
       return 'Underweight';

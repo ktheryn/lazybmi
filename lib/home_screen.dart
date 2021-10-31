@@ -25,9 +25,9 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
   String BMIscore = '18.1';
   String BMIresults = 'NORMAL';
   String BMIText = "You have a normal body weight. Good job!";
-
   List<String> bmiscorelist = [];
   List<String> bmiresultlist = [];
+  final GlobalKey _parentKey = GlobalKey();
 
   void addtolist(String value, String value2) {
     setState(() {
@@ -81,9 +81,11 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
 
     return Column(
       children: [
@@ -94,7 +96,7 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
             decoration: const BoxDecoration(
               color: kPrimaryBmiAddonTwo,
               borderRadius:
-              BorderRadius.only(bottomLeft: Radius.elliptical(100, 30)),
+                  BorderRadius.only(bottomLeft: Radius.elliptical(100, 30)),
             ),
             child: Row(
               children: [
@@ -253,7 +255,7 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                   min: 120,
                   max: 200,
                   interval: 10,
-                  stepSize: 1,
+                  stepSize: 0.1,
                   showDividers: true,
                   showTicks: true,
                   showLabels: true,
@@ -281,7 +283,47 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                   ),
                 ),
                 decoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+                    BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+              ),
+              Expanded(
+                child: Padding(
+                  padding:  kpaddingstyle4,
+                  child: Table(
+                    border: TableBorder.all(style: BorderStyle.solid, color: kPrimaryBmiSlider, width: 1.5),
+                    children: [
+                      TableRow(children: [
+                        Text(
+                          'Classification', style: kltablelabelstyle1, textAlign: TextAlign.center,
+                        ),
+                        Text('BMI (kg/m\u00B2)', style: kltablelabelstyle1, textAlign: TextAlign.center,),
+                      ]),
+                      TableRow(children: [
+                        Text('Underweight', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                        Text('<18.5', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                      ]),
+                      TableRow(children: [
+                        Text('Normal', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                        Text('18.5-24.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                      ]),
+                      TableRow(children: [
+                        Text('Overweight', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                        Text('25-29.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                      ]),
+                      TableRow(children: [
+                        Text('Obesity I', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                        Text('30-34.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                      ]),
+                      TableRow(children: [
+                        Text('Obesity II', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                        Text('35-39.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                      ]),
+                      TableRow(children: [
+                        Text('Obesity III', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                        Text('>40', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                      ]),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -294,7 +336,7 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
           decoration: const BoxDecoration(
             color: kPrimaryBmiAddonTwo,
             borderRadius:
-            BorderRadius.only(topRight: Radius.elliptical(100, 30)),
+                BorderRadius.only(topRight: Radius.elliptical(100, 30)),
           ),
           child: Stack(
             overflow: Overflow.visible,
@@ -307,21 +349,21 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      calculator calc = calculator(height: _height, weight: _weight);
+                      calculator calc =
+                          calculator(height: _height, weight: _weight);
                       BMIscore = calc.calculateBMI();
                       BMIresults = calc.getResult();
                       BMIText = calc.getInterpretation();
                       addtolist(BMIscore, BMIresults);
                       saveStringToSF(bmiscorelist);
                       saveStringToSF2(bmiresultlist);
-                      Navigator.push(context,
+                      Navigator.push(
+                          context,
                           MaterialPageRoute(
                               builder: (context) => SaveScreen(
-                                bmislist: bmiscorelist,
-                                bmirlist: bmiresultlist ,
-                              )
-                          )
-                      );
+                                    bmislist: bmiscorelist,
+                                    bmirlist: bmiresultlist,
+                                  )));
                     });
                   },
                   child: Container(
@@ -329,10 +371,17 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                     width: 150,
                     child: Stack(
                       //alignment: Alignment.center,
-                        children: [
-                          Image.asset('images/applen.png'),
-                          const Center(child: Text("Calculate",style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),)),
-                        ],
+                      children: [
+                        Image.asset('images/applen.png'),
+                        const Center(
+                            child: Text(
+                          "Calculate",
+                          style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        )),
+                      ],
                     ),
                   ),
                   // child: Container(
@@ -361,12 +410,17 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                 children: [
                   Container(
                     alignment: Alignment.topLeft,
-                    child: const Text('Your BMI',style: TextStyle(fontSize: 19,fontWeight: FontWeight.bold,color: Colors.white),),
+                    child: const Text(
+                      'Your BMI',
+                      style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
                   Container(
                     alignment: Alignment.topLeft,
-                    child: Text(BMIscore,
-                        style: klbottomlabelstyle2),
+                    child: Text(BMIscore, style: klbottomlabelstyle2),
                   ),
                   Container(
                     alignment: Alignment.topLeft,
@@ -374,7 +428,13 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                   ),
                   Container(
                     alignment: Alignment.topLeft,
-                    child: Text(BMIText, style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
+                    child: Text(
+                      BMIText,
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -397,9 +457,12 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         labelText: 'Weight: lb',
                         labelStyle: klabelstyle,
+                        hintText: 'ex. 132.2',
+                        hintStyle: TextStyle(color: Colors.black54),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
                   ),
                 ),
@@ -407,8 +470,11 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Height: ft & inch',
+                      hintText: 'ex. 61.0',
+                      hintStyle: TextStyle(color: Colors.black54),
                       labelStyle: klabelstyle,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                     ),
@@ -426,19 +492,34 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
             "Calculate",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
-          onPressed: () => Navigator.pop(context),
-          color: const Color.fromRGBO(0, 179, 134, 1.0),
+          onPressed: () => setState(() {
+            calculator calc = calculator(height: _height, weight: _weight);
+            BMIscore = calc.calculateBMI2();
+            BMIresults = calc.getResult();
+            BMIText = calc.getInterpretation();
+            addtolist(BMIscore, BMIresults);
+            saveStringToSF(bmiscorelist);
+            saveStringToSF2(bmiresultlist);
+            Navigator.pop(context);
+          }),
+          color: kPrimaryBmiSlider,
         ),
         DialogButton(
           child: const Text(
             "Cancel",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
-          onPressed: () => Navigator.pop(context),
-          gradient: const LinearGradient(colors: [
-            Color.fromRGBO(116, 116, 191, 1.0),
-            Color.fromRGBO(52, 138, 199, 1.0),
-          ]),
+          onPressed: () => setState(() {
+            calculator calc = calculator(height: _height, weight: _weight);
+            BMIscore = calc.calculateBMI2();
+            BMIresults = calc.getResult();
+            BMIText = calc.getInterpretation();
+            addtolist(BMIscore, BMIresults);
+            saveStringToSF(bmiscorelist);
+            saveStringToSF2(bmiresultlist);
+            Navigator.pop(context);
+          }),
+          color: kPrimaryBmiSlider,
         )
       ],
     ).show();
