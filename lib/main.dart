@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'header.dart';
 import 'constants.dart';
+import 'home_screen.dart';
 
 void main() {
   runApp(const MyBMI());
@@ -16,7 +16,7 @@ class MyBMI extends StatelessWidget {
         primaryColor: Color(0xFF396a7e),
         scaffoldBackgroundColor: kPrimaryBmiBackground,
       ),
-      home: BMIScreen(),
+      home: AppBarExtensionTwo(),
     );
   }
 }

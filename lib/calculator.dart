@@ -16,7 +16,7 @@ class calculator {
 
 
   String calculateBMI2() {
-    _bmi = weight / pow(height / 100, 2);
+    _bmi = weight / pow(height*12,2)*703;
     return _bmi.toStringAsFixed(1);
   }
 
