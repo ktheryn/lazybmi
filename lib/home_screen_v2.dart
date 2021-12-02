@@ -31,6 +31,8 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
   String BMIText = "You have a normal body weight. Good job!";
   List<String> bmiscorelist = [];
   List<String> bmiresultlist = [];
+  final heightInchesController = TextEditingController();
+  final weightPoundsController = TextEditingController();
   final GlobalKey _parentKey = GlobalKey();
 
   void addtolist(String value, String value2) {
@@ -528,10 +530,11 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
           padding: const EdgeInsets.all(15.0),
           child: Container(
             child: Column(
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: weightPoundsController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         labelText: 'Weight: lb',
@@ -545,9 +548,10 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: heightInchesController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Height: ft & inch',
+                      labelText: 'Height: inches',
                       hintText: 'ex. 61.0',
                       hintStyle: TextStyle(color: Colors.black54),
                       labelStyle: klabelstyle,
@@ -570,13 +574,12 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
             style: TextStyle(color: Color(0xFF396a7e), fontSize: 18,fontWeight: FontWeight.bold,),
           ),
           onPressed: () => setState(() {
-            calculator calc = calculator(height: _height, weight: _weight);
+            calculator calc = calculator(height: double.parse(heightInchesController.text), weight: double.parse(weightPoundsController.text));
             BMIscore = calc.calculateBMI2();
             BMIresults = calc.getResult();
             BMIText = calc.getInterpretation();
-            addtolist(BMIscore, BMIresults);
-            saveStringToSF(bmiscorelist);
-            saveStringToSF2(bmiresultlist);
+            heightInchesController.clear();
+            weightPoundsController.clear();
             Navigator.pop(context);
           }),
           color: Colors.white,
@@ -588,13 +591,8 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
             style: TextStyle(color: Colors.white, fontSize: 18,fontWeight: FontWeight.bold,),
           ),
           onPressed: () => setState(() {
-            calculator calc = calculator(height: _height, weight: _weight);
-            BMIscore = calc.calculateBMI2();
-            BMIresults = calc.getResult();
-            BMIText = calc.getInterpretation();
-            addtolist(BMIscore, BMIresults);
-            saveStringToSF(bmiscorelist);
-            saveStringToSF2(bmiresultlist);
+            heightInchesController.clear();
+            weightPoundsController.clear();
             Navigator.pop(context);
           }),
           color: kPrimaryBmiSlider,

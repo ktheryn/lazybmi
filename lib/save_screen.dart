@@ -102,12 +102,12 @@ class _SaveScreenState extends State<SaveScreen> {
                                 Text(bmiresuldtslist[index],style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25.0,color: Colors.white),),
                               ],
                             ),
-                            Row(
-                              children: <Widget>[
-                                SizedBox(width: 7,),
-                                Text("Saved Date",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15.0),),
-                              ],
-                            ),
+                            // Row(
+                            //   children: <Widget>[
+                            //     SizedBox(width: 7,),
+                            //     Text("Saved Date",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15.0),),
+                            //   ],
+                            // ),
                             SizedBox(height: 10,),
                           ],
                         ),
