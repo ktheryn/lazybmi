@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazybmi/home_screen_v2.dart';
 import 'header.dart';
 import 'constants.dart';
 
@@ -16,7 +17,7 @@ class MyBMI extends StatelessWidget {
         primaryColor: Color(0xFF396a7e),
         scaffoldBackgroundColor: kPrimaryBmiBackground,
       ),
-      home: BMIScreen(),
+      home: BMIScreenV2(),
     );
   }
 }
