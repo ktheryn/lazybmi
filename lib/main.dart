@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lazybmi/home_screen_v2.dart';
-import 'header.dart';
 import 'constants.dart';
 
 void main() {
