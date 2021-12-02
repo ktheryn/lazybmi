@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'constants.dart';
 import 'reusable.dart';
 import 'calculator.dart';
@@ -11,6 +12,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'save_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class AppBarExtensionTwo extends StatefulWidget {
   const AppBarExtensionTwo({Key? key}) : super(key: key);
@@ -27,7 +29,6 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
   String BMIText = "You have a normal body weight. Good job!";
   List<String> bmiscorelist = [];
   List<String> bmiresultlist = [];
-  final GlobalKey _parentKey = GlobalKey();
 
   void addtolist(String value, String value2) {
     setState(() {
@@ -81,13 +82,71 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-
-    return Column(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text('BMI CALCULATOR'),
+        backgroundColor: kPrimaryBmiAddonTwo,
+      ),
+      //body: AppBarExtension(),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        animatedIconTheme: IconThemeData(size: 22.0),
+        closeManually: false,
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        onOpen: () => print('OPENING DIAL'),
+        onClose: () => print('DIAL CLOSED'),
+        tooltip: 'Speed Dial',
+        heroTag: 'speed-dial-hero-tag',
+        backgroundColor: kPrimaryBmiSlider,
+        foregroundColor: Colors.white,
+        elevation: 8.0,
+        shape: CircleBorder(),
+        children: [
+          SpeedDialChild(
+            onTap: (){
+              addtolist(BMIscore, BMIresults);
+              saveStringToSF(bmiscorelist);
+              saveStringToSF2(bmiresultlist);
+            },
+            child: Icon(Icons.save, color: Colors.white),
+            backgroundColor: kPrimaryBmiSlider,
+            labelWidget: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0),color: Colors.white,),
+              margin: EdgeInsets.only(right: 0),
+              padding: EdgeInsets.all(5.0),
+              child: Text('Save',style: TextStyle(fontWeight: FontWeight.bold),),
+            ),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.library_books, color: Colors.white),
+            backgroundColor: kPrimaryBmiSlider,
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SaveScreen(
+                        bmislist: bmiscorelist,
+                        bmirlist: bmiresultlist,
+                      )));
+            },
+            labelWidget: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0),color: Colors.white,),
+              margin: EdgeInsets.only(right: 0),
+              padding: EdgeInsets.all(5.0),
+              child: Text('List BMI',style: TextStyle(fontWeight: FontWeight.bold),),
+            ),
+          ),
+        ],
+      ),
+    body: Column(
       children: [
         Container(
           height: size.height * 0.08,
@@ -147,7 +206,7 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                   inactiveFgColor: Colors.white,
                   initialLabelIndex: 0,
                   totalSwitches: 2,
-                  labels: const ['Metric', 'English'],
+                  labels: const ['kg/cm', 'lb/in'],
                   radiusStyle: true,
                   onToggle: (index) {
                     getToggle(index);
@@ -290,35 +349,35 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                   padding:  kpaddingstyle4,
                   child: Table(
                     border: TableBorder.all(style: BorderStyle.solid, color: kPrimaryBmiSlider, width: 1.5),
-                    children: const [
+                    children: [
                       TableRow(children: [
                         Text(
-                          'Classification', style: TextStyle(color: Color(0xFF396a7e), fontSize: 13, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,
+                          'Classification', style: kltablelabelstyle1, textAlign: TextAlign.center,
                         ),
-                        Text('BMI (kg/m\u00B2)', style: TextStyle(color: Color(0xFF396a7e), fontSize: 13, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,),
+                        Text('BMI (kg/m\u00B2)', style: kltablelabelstyle1, textAlign: TextAlign.center,),
                       ]),
                       TableRow(children: [
-                        Text('Underweight', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
+                        Text('Underweight', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                         Text('<18.5', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                       ]),
                       TableRow(children: [
-                        Text('Normal', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
+                        Text('Normal', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                         Text('18.5-24.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                       ]),
                       TableRow(children: [
-                        Text('Overweight', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
+                        Text('Overweight', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                         Text('25-29.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                       ]),
                       TableRow(children: [
-                        Text('Obesity I', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
+                        Text('Obesity I', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                         Text('30-34.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                       ]),
                       TableRow(children: [
-                        Text('Obesity II', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
+                        Text('Obesity II', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                         Text('35-39.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                       ]),
                       TableRow(children: [
-                        Text('Obesity III', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
+                        Text('Obesity III', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                         Text('>40', style: kltablelabelstyle2, textAlign: TextAlign.center,),
                       ]),
                     ],
@@ -354,16 +413,6 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                       BMIscore = calc.calculateBMI();
                       BMIresults = calc.getResult();
                       BMIText = calc.getInterpretation();
-                      // addtolist(BMIscore, BMIresults);
-                      // saveStringToSF(bmiscorelist);
-                      // saveStringToSF2(bmiresultlist);
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => SaveScreen(
-                      //               bmislist: bmiscorelist,
-                      //               bmirlist: bmiresultlist,
-                      //             )));
                     });
                   },
                   child: Container(
@@ -373,36 +422,19 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                       //alignment: Alignment.center,
                       children: [
                         Image.asset('images/applen.png'),
-                        const Center(
+                        const Positioned(
+                          top: 60,
+                            left: 20,
                             child: Text(
                           "Calculate",
                           style: TextStyle(
-                              fontSize: 19,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         )),
                       ],
                     ),
                   ),
-                  // child: Container(
-                  //   alignment: Alignment.center,
-                  //   child: Text(
-                  //     'Calculate',
-                  //     style: TextStyle(
-                  //         color: Colors.white,
-                  //         fontSize: 20,
-                  //         fontWeight: FontWeight.bold),
-                  //   ),
-                  //   width: 50,
-                  //   height: 80,
-                  //   decoration: BoxDecoration(
-                  //     color: kPrimaryBmiAddonOne,
-                  //     borderRadius: BorderRadius.only(
-                  //       topLeft: Radius.elliptical(70, 20),
-                  //       topRight: Radius.elliptical(50, 20),
-                  //     ),
-                  //   ),
-                  // ),
                 ),
               ),
               Column(
@@ -426,14 +458,17 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                     alignment: Alignment.topLeft,
                     child: Text('$BMIresults ', style: klbottomlabelstyle2),
                   ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      BMIText,
-                      style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.only(right: 50),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        BMIText,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
@@ -442,6 +477,7 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
           ),
         ),
       ],
+    ),
     );
   }
 
@@ -461,7 +497,7 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                     decoration: InputDecoration(
                         labelText: 'Weight: lb',
                         labelStyle: klabelstyle,
-                        hintText: 'ex. 132.2',
+                        hintText: 'ex. 132.27',
                         hintStyle: TextStyle(color: Colors.black54),
                         floatingLabelBehavior: FloatingLabelBehavior.always),
                   ),
@@ -472,8 +508,8 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
                   child: TextField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Height: ft & inch',
-                      hintText: 'ex. 61.0',
+                      labelText: 'Height: ft & in',
+                      hintText: 'ex. 5.1',
                       hintStyle: TextStyle(color: Colors.black54),
                       labelStyle: klabelstyle,
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -486,40 +522,27 @@ class _AppBarExtensionTwoState extends State<AppBarExtensionTwo> {
         ),
       ),
       title: "Input weight & height",
-      style: const AlertStyle(titleStyle: TextStyle(color: Color(0xFF396a7e), fontSize: 25, fontWeight: FontWeight.bold,)),
       buttons: [
         DialogButton(
-          radius: BorderRadius.all(Radius.circular(20)),
           child: const Text(
             "Calculate",
-            style: TextStyle(color: Color(0xFF396a7e), fontSize: 18,fontWeight: FontWeight.bold,),
+            style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           onPressed: () => setState(() {
             calculator calc = calculator(height: _height, weight: _weight);
             BMIscore = calc.calculateBMI2();
             BMIresults = calc.getResult();
             BMIText = calc.getInterpretation();
-            addtolist(BMIscore, BMIresults);
-            saveStringToSF(bmiscorelist);
-            saveStringToSF2(bmiresultlist);
             Navigator.pop(context);
           }),
-          color: Colors.white,
+          color: kPrimaryBmiSlider,
         ),
         DialogButton(
-          radius: BorderRadius.all(Radius.circular(20)),
           child: const Text(
             "Cancel",
-            style: TextStyle(color: Colors.white, fontSize: 18,fontWeight: FontWeight.bold,),
+            style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           onPressed: () => setState(() {
-            calculator calc = calculator(height: _height, weight: _weight);
-            BMIscore = calc.calculateBMI2();
-            BMIresults = calc.getResult();
-            BMIText = calc.getInterpretation();
-            addtolist(BMIscore, BMIresults);
-            saveStringToSF(bmiscorelist);
-            saveStringToSF2(bmiresultlist);
             Navigator.pop(context);
           }),
           color: kPrimaryBmiSlider,
