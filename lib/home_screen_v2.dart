@@ -379,17 +379,23 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                       height: 150,
                       width: 150,
                       child: Stack(
-                        //alignment: Alignment.center,
+                        alignment: Alignment.center,
                         children: [
                           Image.asset('images/applen.png'),
-                          const Center(
-                              child: Text(
-                                "Calculate",
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              )),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Center(
+                                  child: Text(
+                                    "Calculate",
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  )),
+                              SizedBox(height: 50.0,),
+                            ],
+                          ),
                         ],
                       ),
                     ),
