@@ -141,7 +141,7 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                     style: Theme.of(context)
                         .textTheme
                         .headline4!
-                        .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+                        .copyWith(fontWeight: FontWeight.bold, fontSize: (MediaQuery.of(context).size.width)*0.0375),
                   ),
                 ),
                 const Spacer(),
@@ -195,8 +195,8 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                       Container(
                         child: Text(
                           _weight.toStringAsFixed(1) + ' kg',
-                          style: const TextStyle(
-                              fontSize: 22.0,
+                          style: TextStyle(
+                              fontSize: (MediaQuery.of(context).size.width)*0.045,
                               color: kPrimaryBmiSlider,
                               fontWeight: FontWeight.bold),
                         ),
@@ -251,7 +251,7 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                 style: Theme.of(context)
                     .textTheme
                     .headline4!
-                    .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+                    .copyWith(fontWeight: FontWeight.bold, fontSize: (MediaQuery.of(context).size.width)*0.0375),
               ),
             ),
           ),
@@ -286,8 +286,8 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                       quarterTurns: 1,
                       child: Text(
                         _height.toStringAsFixed(1) + ' cm',
-                        style: const TextStyle(
-                            fontSize: 22.0,
+                        style: TextStyle(
+                            fontSize: (MediaQuery.of(context).size.width)*0.045,
                             color: kPrimaryBmiSlider,
                             fontWeight: FontWeight.bold),
                       ),
@@ -301,36 +301,36 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                     padding:  kpaddingstyle4,
                     child: Table(
                       border: TableBorder.all(style: BorderStyle.solid, color: kPrimaryBmiSlider, width: 1.5),
-                      children: const [
+                      children: [
                         TableRow(children: [
                           Text(
-                            'Classification', style: TextStyle(color: Color(0xFF396a7e), fontSize: 13, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,
+                            'Classification', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,
                           ),
-                          Text('BMI (kg/m\u00B2)', style: TextStyle(color: Color(0xFF396a7e), fontSize: 13, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,),
+                          Text('BMI (kg/m\u00B2)', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,),
                         ]),
                         TableRow(children: [
-                          Text('Underweight', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
-                          Text('<18.5', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                          Text('Underweight', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
+                          Text('<18.5', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
                         ]),
                         TableRow(children: [
-                          Text('Normal', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
-                          Text('18.5-24.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                          Text('Normal', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
+                          Text('18.5-24.9', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
                         ]),
                         TableRow(children: [
-                          Text('Overweight', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
-                          Text('25-29.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                          Text('Overweight', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
+                          Text('25-29.9', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
                         ]),
                         TableRow(children: [
-                          Text('Obesity I', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
-                          Text('30-34.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                          Text('Obesity I', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
+                          Text('30-34.9', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
                         ]),
                         TableRow(children: [
-                          Text('Obesity II', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
-                          Text('35-39.9', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                          Text('Obesity II', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
+                          Text('35-39.9', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
                         ]),
                         TableRow(children: [
-                          Text('Obesity III', style: TextStyle(color: Color(0xFF396a7e), fontSize: 14), textAlign: TextAlign.center,),
-                          Text('>40', style: kltablelabelstyle2, textAlign: TextAlign.center,),
+                          Text('Obesity III', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
+                          Text('>40', style: TextStyle(color: Color(0xFF396a7e), fontSize: (MediaQuery.of(context).size.width)*0.026), textAlign: TextAlign.center,),
                         ]),
                       ],
                     ),
@@ -386,16 +386,16 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                           Image.asset('images/applen.png'),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
+                            children: [
                               Center(
                                   child: Text(
                                     "Calculate",
                                     style: TextStyle(
-                                        fontSize: 19,
+                                        fontSize: (MediaQuery.of(context).size.width)*0.045,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
                                   )),
-                              SizedBox(height: 50.0,),
+                              SizedBox(height: (MediaQuery.of(context).size.height)*0.055,),
                             ],
                           ),
                         ],
@@ -427,30 +427,33 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
-                      child: const Text(
+                      child: Text(
                         'Your BMI',
                         style: TextStyle(
-                            fontSize: 19,
+                            fontSize: (MediaQuery.of(context).size.width)*0.045,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
                     ),
                     Container(
                       alignment: Alignment.topLeft,
-                      child: Text(BMIscore, style: klbottomlabelstyle2),
+                      child: Text(BMIscore, style: TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.width)*0.095, fontWeight: FontWeight.bold)),
                     ),
                     Container(
                       alignment: Alignment.topLeft,
-                      child: Text('$BMIresults ', style: klbottomlabelstyle2),
+                      child: Text('$BMIresults ', style:  TextStyle(color: Colors.white, fontSize: (MediaQuery.of(context).size.width)*0.095, fontWeight: FontWeight.bold)),
                     ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        BMIText,
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                    Padding(
+                      padding: EdgeInsets.only(right: (MediaQuery.of(context).size.width)*0.095),
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          BMIText,
+                          style: TextStyle(
+                              fontSize: (MediaQuery.of(context).size.width)*0.035,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
                   ],
