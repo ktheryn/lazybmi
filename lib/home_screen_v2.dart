@@ -568,7 +568,7 @@ class _BMIScreenV2State extends State<BMIScreenV2> {
         ),
       ),
       title: "Input weight & height",
-      style: const AlertStyle(titleStyle: TextStyle(color: Color(0xFF396a7e), fontSize: 25, fontWeight: FontWeight.bold,)),
+      style: const AlertStyle(isCloseButton: false,titleStyle: TextStyle(color: Color(0xFF396a7e), fontSize: 25, fontWeight: FontWeight.bold,)),
       buttons: [
         DialogButton(
           radius: BorderRadius.all(Radius.circular(20)),
